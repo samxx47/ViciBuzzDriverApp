@@ -1,4 +1,21 @@
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using APIsViciBuzz.Models;
+using APIsViciBuzz.Services;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<MakeOrderStoreDatabaseSettings>(builder.Configuration.GetSection(nameof(MakeOrderStoreDatabaseSettings)));
+
+builder.Services.AddSingleton<IMakeOrderStoreDatabaseSettings>(sp=>
+                                                                sp.GetRequiredService<IOptions<MakeOrderStoreDatabaseSettings>>().Value);
+
+builder.Services.AddSingleton<IMongoClient>(s=>
+                                                new MongoClient(builder.Configuration.GetValue<string> ("MakeOrderStoreDatabaseSettings:ConnectionString") ));
+
+builder.Services.AddScoped<IMakeOrderService, MakeOrderService>();
 
 // Add services to the container.
 
