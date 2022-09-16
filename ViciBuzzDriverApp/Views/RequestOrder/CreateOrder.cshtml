@@ -12,15 +12,16 @@
   /* The width is the width of the web page */
 }
 </style>
- <script
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuo1Q1YmWLYhLybQ2hUb6ogiuipOipCfg&callback=initMap&v=weekly"
       defer
     ></script>
- 
- @* <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuo1Q1YmWLYhLybQ2hUb6ogiuipOipCfg&callback=initMap&v=weekly"
-      defer
-    ></script>*@
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <h1>TRYING GIT  BARNCH S-TEST1</h1>
 <h2>Create New Orders</h2>
 <div id="map"></div>
 @using (Html.BeginForm())
@@ -47,9 +48,10 @@
                 </div>
                     <div class="form-group">
             @Html.LabelFor(model => model.PickUpFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <I>Select the location from the Map or Enter the address manualy</I>
                         <div class="col-md-10">
-                @Html.EditorFor(model => model.PickUpFrom, new { htmlAttributes = new { @class = "form-control" } })
-
+               @* @Html.EditorFor(model => model.PickUpFrom, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input name="PickUpFrom" id="pickfrom" type="text"/>
                         </div>
                     </div>
                         <div class="form-group">
@@ -78,35 +80,33 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 <script>
+
+    var address="";
     // Initialize and add the map
 function initMap() {
   // The location of Uluru
-  const myLatlng = { lat: 24.579, lng: 80.832 };
+  const uluru = { lat: 24.6005, lng: 80.8322 };
   // The map, centered at Uluru
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 12,
-    center: myLatlng,
+    zoom: 15,
+    center: uluru,
   });
-
-  
   // The marker, positioned at Uluru
   const marker = new google.maps.Marker({
-    position: myLatlng,
+    position: uluru,
     map: map,
   });
-}
-declare global {
-  interface Window {
-    initMap: () => void;
-  }
-}
 
+  google.maps.event.addListener(map, 'click', function(event) {
+    
+alert(event.latLng.lat() + ", " + event.latLng.lng());
 
-window.initMap = initMap;
+});
+}
 
 
 </script>
+
 
 
