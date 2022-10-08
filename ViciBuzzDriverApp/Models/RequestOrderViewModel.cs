@@ -13,7 +13,15 @@
 
         public string DeliverTo { get; set; } = String.Empty;
 
-         public string MadeBy { get; set; } = String.Empty;
+        public string MadeBy { get; set; } = String.Empty;
+
+        public string tolat { get; set; } = String.Empty;
+
+        public string tolon { get; set; } = String.Empty;
+
+        public string fromlat { get; set; } = String.Empty;
+
+        public string fromlon { get; set; } = String.Empty;
 
 
     }

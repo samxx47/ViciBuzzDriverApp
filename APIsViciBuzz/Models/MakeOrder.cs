@@ -29,5 +29,24 @@ namespace APIsViciBuzz.Models
             [BsonElement("madeby")]
             public string madeby { get; set; } = String.Empty;
 
+            [BsonElement("tolat")]
+            public string tolat { get; set; } = String.Empty;
+
+            [BsonElement("tolon")]
+            public string tolon { get; set; } = String.Empty;
+
+            [BsonElement("fromlat")]
+            public string fromlat { get; set; } = String.Empty;
+           
+           
+            [BsonElement("fromlon")]
+            public string fromlon { get; set; } = String.Empty;
+
+
+
+
+
+
+
     }
 }
