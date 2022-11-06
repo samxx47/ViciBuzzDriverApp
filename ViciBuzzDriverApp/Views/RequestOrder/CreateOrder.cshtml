@@ -24,6 +24,9 @@
     <h1>TRYING GIT  BARNCH S-TEST2</h1>
 <h2>Create New Orders</h2>
 <div id="map"></div>
+<br />
+<hr />
+<div id="maptwo"></div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -57,7 +60,8 @@
                         <div class="form-group">
             @Html.LabelFor(model => model.DeliverTo, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                @Html.EditorFor(model => model.DeliverTo, new { htmlAttributes = new { @class = "form-control" } })
+               @* @Html.EditorFor(model => model.DeliverTo, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <input name="PickUpFrom" id="deliverto" type="text"/>
                         </div>
                     </div>
 
@@ -118,11 +122,14 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
 <script>
 
-    var address="";
+
+ 
     // Initialize and add the map
 function initMap() {
+    
   // The location of Uluru
   const uluru = { lat: 24.6005, lng: 80.8322 };
   // The map, centered at Uluru
@@ -134,15 +141,73 @@ function initMap() {
   const marker = new google.maps.Marker({
     position: uluru,
     map: map,
+
   });
 
   google.maps.event.addListener(map, 'click', function(event) {
+      var index=0;
+      alert("Please click teh Red Marker first before selecting the addresses from map");
+        const list = document.getElementsByClassName("address");
+        if(index==0){
+             if(list.item(0) != null){
+         let addline1= list.item(0).innerText;
+         document.getElementById("pickfrom").value= addline1;
+         console.log("ADDLINE 1"+addline1);
+         index++;
+        }
+
+        }
+        if(index==1){
+             if(list.item(0) != null){
+         let addline1= list.item(0).innerText;
+         document.getElementById("deliverto").value= addline1;
+         console.log("ADDLINE 1"+addline1);
+            }
+            index=0;
+        }
     
-alert(event.latLng.lat() + ", " + event.latLng.lng());
+      
+    const userAction = async () => {
+    const response = await fetch('http://maps.googleapis.com/maps/api/geocode/json?latlng=32,75&sensor=true', {
+      method: 'POST',
+      body: myBody, // string or object
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    const myJson = await response.json(); //extract JSON from the http response
+   
+  // do something with myJson
+    
+    }
+    //console.log();
+ 
+     console.log("HKFKCVYFUVUFI");
+     
+   //  var listup = document.getElementsByClassName("address-line");
+    var te =document.querySelector('.address');
+    
+   
+    // console.log(te);
+   
+    //alert(event.latLng.lat() + ", " + event.latLng.lng());
+
 
 });
+ 
 }
 
+console.log("ASDFGHJKL");
+
+
+
+
+
+
+
+
+//something
 
 </script>
 
